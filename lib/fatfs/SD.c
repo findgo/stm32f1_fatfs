@@ -503,13 +503,11 @@ DRESULT SD_WriteMultiBlock(uint32_t sector, const uint8_t *buf, uint8_t blockcnt
         cmd = CMD24;
     else{
         cmd = CMD25;
-        /*
         // 如果目标卡不是MMC卡,启动ACMD23指令使能预擦除
         if(SD_Type != SD_TYPE_MMC){
             SD_SendCmd(CMD55,0,0x01);   
-            SD_SendCmd(ACMD23,cnt,0X01);//发送指令  
+            SD_SendCmd(ACMD23,blockcnt,0X01);//发送指令  
          }  
-        */
     }
     if(SD_SendCmd(cmd,sector) != 0x00){
         __SD_DisSelect();
